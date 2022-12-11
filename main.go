@@ -13,10 +13,10 @@ import (
 func main() {
 
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
-	hh := handlers.NewHello(l)
+	ph := handlers.NewProduct(l)
 
 	sm := http.NewServeMux()
-	sm.Handle("/", hh)
+	sm.Handle("/", ph)
 
 	s := &http.Server{
 		Addr:         ":9090",
@@ -41,5 +41,6 @@ func main() {
 	l.Println("Recived terminate, graceful shutdown", sig)
 
 	tc, _ := context.WithTimeout(context.Background(), 30*time.Second)
+
 	s.Shutdown(tc)
 }
